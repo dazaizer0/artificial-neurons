@@ -1,4 +1,4 @@
-import AILib as ai
+import aLib as ai
 import random
 
 def GEN_2VAL_LIST(short_temp):
