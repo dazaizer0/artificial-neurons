@@ -1,4 +1,7 @@
-from amadeus import aLib as al, aData as ad
+import sys
+sys.path.append('alib')
+
+from alib import aLib as al, aData as ad, aRandom as ar
 
 bias_b = 6
 accuracy_d = 0.01
@@ -7,8 +10,10 @@ outcome_a = 0
 xtrain: list = []
 answers: list = []
 
+train_amount = 1000
+
 if __name__ == '__main__':
-    ad.GEN_2VAL_LISTS_ANSWERS(1000, xtrain, answers)
+    ad.GEN_2VAL_LISTS_ANSWERS(train_amount, xtrain, answers)
     print(xtrain)
     print(answers)
 
@@ -20,4 +25,5 @@ if __name__ == '__main__':
         n1 = al.NeuronModule(xtrain[i], neuron_w, bool(answers[i]), not bool(answers[i]))
         n1.TRAIN_NEURON(outcome_a, bias_b, accuracy_d, mode)
         neuron_w = n1.w
-        
+
+    print(f'\nTests were carried out on {train_amount} modules')

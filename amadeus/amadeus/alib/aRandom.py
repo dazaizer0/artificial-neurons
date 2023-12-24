@@ -1,3 +1,5 @@
+import random
+
 class RandomModule:
     nr: int
 
