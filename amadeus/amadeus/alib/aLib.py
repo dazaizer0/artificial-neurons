@@ -75,6 +75,7 @@ class NeuronModule:
         a = 0
         for i in range(0, len(self.x), 2):
             a += ((self.x[i] * self.w[i]) + (self.x[i + 1] * self.w[i + 1])) + Bias
+
         return a
 
     def TRAIN_NEURON(self, a_Result, b_Bias, d_Accuracy, mode_rules: Mode):
@@ -150,6 +151,7 @@ def RETURN_TRANSFERRED_DATA(from_neuron1: NeuronModule, from_neuron2: NeuronModu
     A2 = from_neuron2.ACTIVATE(B)
 
     to_neuron.x = [A1, A2]
+
     return to_neuron.ACTIVATE(B)
 
 class NeuronNetworkModule:  # IN DEVELOPMENT
