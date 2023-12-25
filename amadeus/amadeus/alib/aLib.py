@@ -52,6 +52,13 @@ class NeuronModule:
         return f'x: {self.x}, w: {self.w}, answer: {self.answer}, nreturn: {self.nreturn}'
 
     def LOG_DATA(self, a_result, b_Bias, file_name):
+        """
+        Write to file actual data
+        :param a_result:
+        :param b_Bias:
+        :param file_name:
+        :return:
+        """
         file = open(file_name, 'a')
         file.write(f'{str(datetime.now())}, {self.x}, {self.w}, {b_Bias}, {a_result}, {self.answer}, {self.nreturn},\n')
         file.close()
@@ -102,7 +109,6 @@ class NeuronModule:
                     else:
                         print("wrong = pen")
             else:
-
                 print(f'BEF >> W: {self.w}, B: {b_Bias}, nreturn: {self.nreturn}, X: {self.x}')
 
                 self.w = RETURN_NEW_W(d_Accuracy, self.w, self.x, self.answer)
@@ -147,6 +153,9 @@ def RETURN_TRANSFERRED_DATA(from_neuron1: NeuronModule, from_neuron2: NeuronModu
     return to_neuron.ACTIVATE(B)
 
 class NeuronNetworkModule:  # IN DEVELOPMENT
+    """
+    Network constructed with numbers of single neurons modules
+    """
     def __init__(self, neuron_list: list, layers: int):
         self.neuron_list = neuron_list
         self.layers = layers
@@ -162,6 +171,14 @@ def LOG_OTHER(neuron_x, neuron_w, b_Bias, a_Result, nreturn, answer, file_name):
     file.close()
 
 def RETURN_NEW_W(d_Accuracy, neuron_w, neuron_x, answer: bool):
+    """
+    Calculate new values for the weights of artificial neurons
+    :param d_Accuracy:
+    :param neuron_w:
+    :param neuron_x:
+    :param answer:
+    :return:
+    """
     if answer:
         for i in range(0, len(neuron_w)):
             neuron_w[i] = neuron_w[i] + neuron_x[i] * d_Accuracy * -1
@@ -172,6 +189,13 @@ def RETURN_NEW_W(d_Accuracy, neuron_w, neuron_x, answer: bool):
     return neuron_w
 
 def RETURN_NEW_B(d_Accuracy, b_Bias, answer: bool):
+    """
+    Calculate new values for the bias of artificial neurons system
+    :param d_Accuracy:
+    :param b_Bias:
+    :param answer:
+    :return:
+    """
     if answer:
         return b_Bias + -1 * d_Accuracy
     else:
