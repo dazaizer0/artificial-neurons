@@ -1,26 +1,27 @@
 import sys
-sys.path.append('alib')
-from alib import aLib as al, aData as ad, aRandom as ar
 import random
 
-# Setup variables
-bias_b = random.randint(0, 10)
-accuracy_d = 0.01
-outcome_a = 0
-
-xtrain: list = []
-answers: list = []
-
-train_amount = 1000
+sys.path.append('alib')
+from alib import aLib as al, aData as ad, aRandom as ar
 
 # Main
 if __name__ == '__main__':
+    # Setup variables
+    bias_b = random.randint(0, 10)
+    accuracy_d = 0.01
+    outcome_a = 0
+
+    x_train: list = []
+    answers: list = []
+
+    train_amount = 1000
+
     try:
         # Generate data to train
-        ad.GEN_2VAL_LISTS_ANSWERS(train_amount, xtrain, answers)
+        ad.GEN_2VAL_LISTS_ANSWERS(train_amount, x_train, answers)
 
         # Print generated data
-        print(f'Random variabled generated for training: -> {xtrain} <-')
+        print(f'Random variabled generated for training: -> {x_train} <-')
         print(f'Answers generated to random variables: -> {answers} <-\n')
 
         # Setup neuron's properties
@@ -30,8 +31,8 @@ if __name__ == '__main__':
         mode = al.Mode(False, 0, outcome_a, n1.nreturn)
 
         # Train neurons by TRAIN_NEURON function
-        for i in range(0, len(xtrain)):
-            n1 = al.NeuronModule(xtrain[i], neuron_w, bool(answers[i]), not bool(answers[i]))
+        for i in range(0, len(x_train)):
+            n1 = al.NeuronModule(x_train[i], neuron_w, bool(answers[i]), not bool(answers[i]))
             n1.TRAIN_NEURON(outcome_a, bias_b, accuracy_d, mode)
             neuron_w = n1.w
 
